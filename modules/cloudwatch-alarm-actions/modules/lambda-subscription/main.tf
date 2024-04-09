@@ -30,11 +30,11 @@ module "lambda" {
   ignore_source_code_hash = true
   # local_existing_package  = local.lambda_function_output_path
   source_path = [
-      {
-        path = "${path.module}/src/${var.type}/lambda.py"
-        pip_requirements = true
-      }
-    ]
+    {
+      path             = "${path.module}/src/${var.type}"
+      pip_requirements = true
+    }
+  ]
 
   # Create and use an IAM role which can log function output to CloudWatch,
   # plus the custom policy that can copy ALB logs from S3 to CloudWatch.
