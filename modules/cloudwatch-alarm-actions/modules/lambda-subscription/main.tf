@@ -17,7 +17,7 @@ data "archive_file" "lambda_code_zip" {
 
 module "lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "4.7.1"
+  version = "7.2.5"
 
   create        = true
   function_name = local.lambda_name
@@ -31,12 +31,12 @@ module "lambda" {
   local_existing_package  = local.lambda_function_output_path
 
   # Create and use an IAM role which can log function output to CloudWatch,
-  # plus the custom policy which can copy ALB logs from S3 to CloudWatch.
+  # plus the custom policy that can copy ALB logs from S3 to CloudWatch.
   attach_cloudwatch_logs_policy     = true
   cloudwatch_logs_retention_in_days = var.log_group_retention_days
   recreate_missing_package          = var.recreate_missing_package
 
-  # in case if this role already created use created one
+  # in case this role is already created use created one
   role_name   = var.role_name
   create_role = var.create_role
 
